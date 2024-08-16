@@ -1,6 +1,7 @@
 import random
 from hangmanData import words
 from stonePaperScissorsSigns import stone,paper,scissor, stone_paper_scissor_data
+import os
 
 
 # Each person bill calculator
@@ -144,3 +145,31 @@ def caesar_cipher():
 
     print(f"Your encoded/decoded message is {final_message}")
 
+
+def auction_bidder():
+    user_dictionary = {
+        'user_names': [],
+        'bid_amounts': []
+    }
+
+    def get_store_user_data():
+        user_name = input("Enter user name: ")
+        bid_amount = float(input("Enter bidding amount: "))
+        user_dictionary['user_names'].append(user_name)
+        user_dictionary['bid_amounts'].append(bid_amount)
+
+    get_store_user_data()
+    user_prompt = input("Are there any other bidders? (yes/no): ").lower()
+
+    while user_prompt == "yes":
+        print("\n" * 20)
+        get_store_user_data()
+        user_prompt = input("Are there any other bidders? (yes/no): ").lower()
+
+    def find_highest_bidder(user_dictionary):
+        max_bidding_amount = max(user_dictionary['bid_amounts'])
+        index = user_dictionary['bid_amounts'].index(max_bidding_amount)
+        max_bidder_name = user_dictionary['user_names'][index]
+        print(f"Winner of the bidding is {max_bidder_name} with a bid of ${max_bidding_amount}")
+
+    find_highest_bidder(user_dictionary)
