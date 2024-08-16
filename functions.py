@@ -1,5 +1,4 @@
 import random
-
 from hangmanData import words
 from stonePaperScissorsSigns import stone,paper,scissor, stone_paper_scissor_data
 
@@ -107,7 +106,41 @@ def play_hangman ():
     else:
         print("Sorry you Lost ")
 
+# Word encode decode app
+def caesar_cipher():
+    user_message = input("Enter a message you want to encode/decode").lower() #bananaz
+    shift_number = int(input("Enter the shift number")) # 3
+    letters = 'abcdefghijklmnopqrstuvwxyz'
+    user_prompt = input("Do you want to encode or decode the message").lower()
+    final_message = ''
+    def encode_message(message, shift):
+        message_list = list(user_message)
+        for i in range(len(message_list)):
+            if message_list[i] == ' ':
+                message_list[i] = '&'
+                continue
+            index = letters.find(message_list[i])
+            message_list[i] = letters[(index + shift) % 26]
 
+        final_message = ''.join(message_list)
+        return final_message
 
+    def decode_message(message, shift):
+        message_list = list(user_message)
+        for i in range(len(message_list)):
+            if message_list[i] == ' ':
+                message_list[i] = '&'
+                continue
+            index = letters.find(message_list[i])
+            message_list[i] = letters[(index - shift) % 26]
 
+        final_message = ''.join(message_list)
+        return final_message
+
+    if user_prompt == "encode":
+        final_message= encode_message(user_message, shift_number)
+    elif user_prompt == "decode":
+        final_message = decode_message(user_message, shift_number)
+
+    print(f"Your encoded/decoded message is {final_message}")
 
